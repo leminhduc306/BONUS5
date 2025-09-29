@@ -1,5 +1,3 @@
-import FourGridIcon from '@/components/icons/FourGridIcon';
-import { IconSymbol } from '@/components/ui/icon-symbol';
 import React, { useState } from 'react';
 import {
   Image,
@@ -12,6 +10,8 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
+import FourGridIcon from '../../components/icons/FourGridIcon';
+import { IconSymbol } from '../../components/ui/icon-symbol';
 import allAppsData from '../../data/allApps.json';
 
 // Centralized icon registry – PNGs by app name (present files under assets/images)
