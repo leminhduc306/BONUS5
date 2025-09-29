@@ -1,8 +1,8 @@
-import ApproveNowIcon from '@/components/icons/ApproveNowIcon';
 import FourGridIcon from '@/components/icons/FourGridIcon';
 import { IconSymbol } from '@/components/ui/icon-symbol';
 import React, { useState } from 'react';
 import {
+  Image,
   SafeAreaView,
   ScrollView,
   StatusBar,
@@ -14,10 +14,23 @@ import {
 } from 'react-native';
 import allAppsData from '../../data/allApps.json';
 
-// Centralized icon registry – add new icons here and reference by app.iconKey in JSON
-const appIconRegistry = {
-  approveNow: ApproveNowIcon,
-  // learning: LearningIcon, ... (add later)
+// Centralized icon registry – PNGs by app name (present files under assets/images)
+const appPngRegistry = {
+  'Approve Now': require('../../assets/images/approve_now.png'),
+  'Discipline': require('../../assets/images/discipline.png'),
+  'Learning': require('../../assets/images/learning.png'),
+  'FPT Care': require('../../assets/images/fpt_care.png'),
+  'Events': require('../../assets/images/event.png'),
+  'FPT Dating': require('../../assets/images/dating.png'),
+  'Birthday': require('../../assets/images/birthday.png'),
+  'Employee Info': require('../../assets/images/employee_info.png'),
+  'News': require('../../assets/images/news.png'),
+  'Reward': require('../../assets/images/reward.png'),
+  'Survey': require('../../assets/images/survey.png'),
+  'Star Ave': require('../../assets/images/star_ave.png'),
+  'Game': require('../../assets/images/game.png'),
+  'My Tasks': require('../../assets/images/my_task.png'),
+  'Payslip': require('../../assets/images/payslip.png'),
 };
 
 export default function AllAppsScreen() {
@@ -38,16 +51,16 @@ export default function AllAppsScreen() {
   const gameFilteredApps = filteredApps.filter(app => gameApps.includes(app));
 
   const AppCard = ({ app }) => {
-    const IconComp = app.iconKey ? appIconRegistry[app.iconKey] : undefined;
+    const pngSource = appPngRegistry[app.name];
     const bgColor = app.iconBg || '#E9F1FF';
     return (
       <TouchableOpacity style={styles.appCard}>
         <View style={[styles.appIcon, { backgroundColor: bgColor }]}>
-          {IconComp ? (
-            <IconComp size={28} />
-          ) : (
+          {pngSource ? (
+            <Image source={pngSource} style={styles.appPng} resizeMode="contain" />
+          ) : app.icon ? (
             <Text style={styles.appIconText}>{app.icon}</Text>
-          )}
+          ) : null}
         </View>
         <View style={styles.appInfo}>
           <Text style={styles.appName}>{app.name}</Text>
@@ -92,7 +105,7 @@ export default function AllAppsScreen() {
               </TouchableOpacity>
             ) : null}
           </View>
-          <FourGridIcon size={18} color="#B5B7BC" />
+          <FourGridIcon size={20} color="#B5B7BC" />
         </View>
       </View>
 
@@ -324,6 +337,10 @@ const styles = StyleSheet.create({
   },
   appIconText: {
     fontSize: 24,
+  },
+  appPng: {
+    width: 40,
+    height: 40,
   },
   appInfo: {
     flex: 1,

@@ -7,6 +7,7 @@ import SupportIcon from '@/components/icons/SupportIcon';
 import { IconSymbol } from '@/components/ui/icon-symbol';
 import React from 'react';
 import {
+  ImageBackground,
   SafeAreaView,
   ScrollView,
   StatusBar,
@@ -80,10 +81,11 @@ export default function ProfileScreen() {
 
       {/* Profile Header */}
       <View style={styles.profileHeader}>
-        <View style={styles.headerBanner}>
-          <View style={styles.citySilhouetteLeft} />
-          <View style={styles.citySilhouetteRight} />
-        </View>
+        <ImageBackground
+          source={require('../../assets/images/background.png')}
+          style={styles.headerBanner}
+          resizeMode="cover"
+        />
         
         <View style={styles.profileSection}>
           <View style={styles.profilePictureContainer}>
@@ -172,44 +174,30 @@ const styles = StyleSheet.create({
   profileHeader: {
     position: 'relative',
     marginBottom: 12,
+    paddingHorizontal: 16,
   },
   headerBanner: {
-    height: 96,
-    backgroundColor: '#4285F4',
+    height: 104,
+    width: '100%',
     position: 'relative',
-  },
-  citySilhouetteLeft: {
-    position: 'absolute',
-    left: 0,
-    bottom: 0,
-    width: 60,
-    height: 40,
-    backgroundColor: '#5A9DFF',
-    borderTopLeftRadius: 20,
-    borderTopRightRadius: 20,
-  },
-  citySilhouetteRight: {
-    position: 'absolute',
-    right: 0,
-    bottom: 0,
-    width: 60,
-    height: 40,
-    backgroundColor: '#5A9DFF',
-    borderTopLeftRadius: 20,
-    borderTopRightRadius: 20,
+    borderRadius: 12,
+    overflow: 'hidden',
+    borderWidth: 1,
+    borderColor: '#E5E7EB',
+    marginTop: 4,
   },
   profileSection: {
     alignItems: 'center',
     marginTop: -36,
-    paddingHorizontal: 16,
+    paddingHorizontal: 12,
   },
   profilePictureContainer: {
     position: 'relative',
-    marginBottom: 16,
+    marginBottom: 12,
   },
   profilePicture: {
-    width: 90,
-    height: 90,
+    width: 80,
+    height: 80,
     borderRadius: 50,
     backgroundColor: '#E3F2FD',
     justifyContent: 'center',
@@ -218,7 +206,7 @@ const styles = StyleSheet.create({
     borderColor: '#ffffff',
   },
   profileInitial: {
-    fontSize: 30,
+    fontSize: 26,
     fontWeight: '700',
     color: '#4285F4',
   },
@@ -243,34 +231,34 @@ const styles = StyleSheet.create({
   profileInfo: {
     alignItems: 'center',
     position: 'relative',
-    marginTop: 8,
+    marginTop: 6,
   },
   userName: {
-    fontSize: 15,
+    fontSize: 14,
     fontWeight: '700',
     color: '#2d2d2d',
-    marginBottom: 4,
+    marginBottom: 2,
   },
   userDepartment: {
-    fontSize: 12,
+    fontSize: 11,
     fontWeight: '600',
     color: '#6b7280',
-    marginBottom: 4,
+    marginBottom: 2,
   },
   profileHighlight: {
   },
   menuSection: {
     flex: 1,
     paddingHorizontal: 16,
-    marginTop: 8,
+    marginTop: 4,
   },
   menuContentContainer: {
-    paddingBottom: 96,
+    paddingBottom: 32,
   },
   menuItem: {
     flexDirection: 'row',
     alignItems: 'center',
-    paddingVertical: 10,
+    paddingVertical: 8,
     paddingHorizontal: 4,
     borderBottomWidth: 1,
     borderBottomColor: '#f0f0f0',
@@ -278,28 +266,28 @@ const styles = StyleSheet.create({
   menuIconContainer: {
     width: 24,
     alignItems: 'center',
-    marginRight: 16,
+    marginRight: 12,
   },
   menuContent: {
     flex: 1,
   },
   menuName: {
-    fontSize: 14,
+    fontSize: 13,
     color: '#333',
     fontWeight: '500',
   },
   appInfoSection: {
     alignItems: 'center',
-    paddingVertical: 12,
+    paddingVertical: 8,
     paddingHorizontal: 16,
   },
   appVersion: {
-    fontSize: 12,
+    fontSize: 11,
     color: '#666',
-    marginBottom: 4,
+    marginBottom: 2,
   },
   appCopyright: {
-    fontSize: 12,
+    fontSize: 11,
     color: '#666',
   },
   bottomNav: {
