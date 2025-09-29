@@ -1,10 +1,6 @@
-// https://docs.expo.dev/guides/using-eslint/
-const { defineConfig } = require('eslint/config');
-const expoConfig = require('eslint-config-expo/flat');
-
-module.exports = defineConfig([
-  expoConfig,
+// Minimal ESLint config for Expo Snack (no external deps)
+module.exports = [
   {
     ignores: ['dist/*'],
   },
-]);
+];
