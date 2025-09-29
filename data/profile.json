@@ -1,0 +1,56 @@
+{
+  "statusBar": {
+    "time": "11:46",
+    "signal": "4G",
+    "battery": "67%"
+  },
+  "user": {
+    "name": "Phạm Quang Khang",
+    "id": "KHANGPQ3",
+    "department": "BM SE",
+    "initial": "K"
+  },
+  "app": {
+    "name": "myFPT",
+    "version": "5.9.10",
+    "copyright": "Copyright @ FPT Software 2021"
+  },
+  "menuItems": [
+    {
+      "id": 1,
+      "name": "My Profile",
+      "icon": "person.circle",
+      "description": "View and edit your profile information"
+    },
+    {
+      "id": 2,
+      "name": "Settings",
+      "icon": "gearshape.fill",
+      "description": "App settings and preferences"
+    },
+    {
+      "id": 3,
+      "name": "Support",
+      "icon": "shield.fill",
+      "description": "Get help and support"
+    },
+    {
+      "id": 4,
+      "name": "FAQ",
+      "icon": "questionmark.bubble.fill",
+      "description": "Frequently asked questions"
+    },
+    {
+      "id": 5,
+      "name": "Admin",
+      "icon": "person.circle.fill",
+      "description": "Administrative functions"
+    },
+    {
+      "id": 6,
+      "name": "Logout",
+      "icon": "door.left.hand.open",
+      "description": "Sign out of your account"
+    }
+  ]
+}

@@ -1,0 +1,138 @@
+{
+  "statusBar": {
+    "time": "11:46",
+    "signal": "4G",
+    "battery": "67%"
+  },
+  "workApps": [
+    {
+      "id": 1,
+      "name": "Approve Now",
+      "description": "Notify managers of pending requests and allow managers to approve/reject requests from internal tools.",
+      "iconKey": "approveNow",
+      "iconBg": "#E9F1FF",
+      "color": "#4285F4",
+      "category": "WORK"
+    },
+    {
+      "id": 2,
+      "name": "Reward",
+      "description": "Send colleagues a thank you note or reward Gold for exceptional contribution.",
+      "icon": "🏆",
+      "color": "#4285F4",
+      "category": "WORK"
+    },
+    {
+      "id": 3,
+      "name": "Discipline",
+      "description": "Send a discipline warning to subordinates for violation of codes of conduct.",
+      "icon": "⚖️",
+      "color": "#4285F4",
+      "category": "WORK"
+    },
+    {
+      "id": 4,
+      "name": "Learning",
+      "description": "View a list of mandatory, registered and suggested learning courses; check-in and send feedback for each course.",
+      "icon": "🎓",
+      "color": "#4285F4",
+      "category": "WORK"
+    },
+    {
+      "id": 5,
+      "name": "My Tasks",
+      "description": "Manage your daily tasks and assignments.",
+      "icon": "📋",
+      "color": "#4285F4",
+      "category": "WORK"
+    }
+  ],
+  "utilityApps": [
+    {
+      "id": 6,
+      "name": "FPT Care",
+      "description": "FPT Care",
+      "icon": "🛡️",
+      "color": "#4285F4",
+      "category": "UTILITIES"
+    },
+    {
+      "id": 7,
+      "name": "Events",
+      "description": "Register, check-in, check-out, send feedback to company events and programs",
+      "icon": "🎉",
+      "color": "#FFA500",
+      "category": "UTILITIES"
+    },
+    {
+      "id": 8,
+      "name": "Survey",
+      "description": "Conduct and collect responses for company-wide or department-wide surveys",
+      "icon": "📋",
+      "color": "#4285F4",
+      "category": "UTILITIES"
+    },
+    {
+      "id": 9,
+      "name": "FPT Dating",
+      "description": "Dating feature.",
+      "icon": "💕",
+      "color": "#FF6B6B",
+      "category": "UTILITIES"
+    },
+    {
+      "id": 10,
+      "name": "Payslip",
+      "description": "Payslip",
+      "icon": "💰",
+      "color": "#4285F4",
+      "category": "UTILITIES"
+    },
+    {
+      "id": 11,
+      "name": "Birthday",
+      "description": "Your birthday is a special moment. We're very happy to send the best wishes for you. Colleagues can send you birthday wishes on myFPT.",
+      "icon": "🎂",
+      "color": "#4285F4",
+      "category": "UTILITIES"
+    }
+  ],
+  "newsApps": [
+    {
+      "id": 12,
+      "name": "News",
+      "description": "A collection of latest news and notable events around the company",
+      "icon": "📰",
+      "color": "#4285F4",
+      "category": "NEWS"
+    },
+    {
+      "id": 13,
+      "name": "Star Ave",
+      "description": "Recognise notable achievements within a business unit or within FPT",
+      "icon": "⭐",
+      "color": "#4285F4",
+      "category": "NEWS"
+    }
+  ],
+  "wikiApps": [
+    {
+      "id": 14,
+      "name": "Employee Info",
+      "description": "Basic, non-confidential employee information (name, gender, department, etc.)",
+      "icon": "👤",
+      "color": "#4285F4",
+      "category": "WIKI"
+    }
+  ],
+  "gameApps": [
+    {
+      "id": 15,
+      "name": "Game",
+      "description": "Community-engaging games with Gold as rewards",
+      "icon": "🎮",
+      "color": "#4285F4",
+      "category": "GAME"
+    }
+  ]
+}
