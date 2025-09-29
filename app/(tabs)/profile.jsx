@@ -1,10 +1,3 @@
-import AdminIcon from '@/components/icons/AdminIcon';
-import FaqIcon from '@/components/icons/FaqIcon';
-import LogoutIcon from '@/components/icons/LogoutIcon';
-import ProfileMyIcon from '@/components/icons/ProfileMyIcon';
-import SettingsIcon from '@/components/icons/SettingsIcon';
-import SupportIcon from '@/components/icons/SupportIcon';
-import { IconSymbol } from '@/components/ui/icon-symbol';
 import React from 'react';
 import {
   ImageBackground,
@@ -17,6 +10,13 @@ import {
   View,
 } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import AdminIcon from '../../components/icons/AdminIcon';
+import FaqIcon from '../../components/icons/FaqIcon';
+import LogoutIcon from '../../components/icons/LogoutIcon';
+import ProfileMyIcon from '../../components/icons/ProfileMyIcon';
+import SettingsIcon from '../../components/icons/SettingsIcon';
+import SupportIcon from '../../components/icons/SupportIcon';
+import { IconSymbol } from '../../components/ui/icon-symbol';
 import profileData from '../../data/profile.json';
 
 export default function ProfileScreen() {
