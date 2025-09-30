@@ -1,3 +1,4 @@
+import { FontAwesome6 } from '@expo/vector-icons';
 import React, { useState } from 'react';
 import {
   Image,
@@ -10,7 +11,6 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import FourGridIcon from '../../components/icons/FourGridIcon';
 import { IconSymbol } from '../../components/ui/icon-symbol';
 import allAppsData from '../../data/allApps.json';
 
@@ -35,6 +35,7 @@ const appPngRegistry = {
 
 export default function AllAppsScreen() {
   const [searchTerm, setSearchTerm] = useState('');
+  const [viewMode, setViewMode] = useState('list'); // 'list' or 'grid'
 
   const { workApps, utilityApps, newsApps, wikiApps, gameApps, statusBar } = allAppsData;
 
@@ -50,9 +51,34 @@ export default function AllAppsScreen() {
   const wikiFilteredApps = filteredApps.filter(app => wikiApps.includes(app));
   const gameFilteredApps = filteredApps.filter(app => gameApps.includes(app));
 
+  // Ensure stable left-to-right, top-to-bottom order in grid by chunking rows
+  const chunkApps = (items, chunkSize = 4) => {
+    const rows = [];
+    for (let i = 0; i < items.length; i += chunkSize) {
+      rows.push(items.slice(i, i + chunkSize));
+    }
+    return rows;
+  };
+
   const AppCard = ({ app }) => {
     const pngSource = appPngRegistry[app.name];
     const bgColor = app.iconBg || '#E9F1FF';
+    
+    if (viewMode === 'grid') {
+      return (
+        <TouchableOpacity style={styles.gridAppCard}>
+          <View style={[styles.gridAppIcon, { backgroundColor: bgColor }]}>
+            {pngSource ? (
+              <Image source={pngSource} style={styles.gridAppPng} resizeMode="contain" />
+            ) : app.icon ? (
+              <Text style={styles.gridAppIconText}>{app.icon}</Text>
+            ) : null}
+          </View>
+          <Text style={styles.gridAppName}>{app.name}</Text>
+        </TouchableOpacity>
+      );
+    }
+    
     return (
       <TouchableOpacity style={styles.appCard}>
         <View style={[styles.appIcon, { backgroundColor: bgColor }]}>
@@ -91,13 +117,14 @@ export default function AllAppsScreen() {
       <View style={styles.stickyHeader}>
         <View style={styles.searchContainer}>
           <View style={styles.searchBar}>
-            <IconSymbol name="magnifyingglass" size={16} color="#B5B7BC" />
+            <FontAwesome6 name="magnifying-glass" size={18} color="#B5B7BC" />
             <TextInput
               style={styles.searchInput}
               placeholder="Type feature's name"
               placeholderTextColor="#B5B7BC"
               value={searchTerm}
-              onChangeText={setSearchTerm}
+            onChangeText={setSearchTerm}
+            underlineColorAndroid="transparent"
             />
             {searchTerm ? (
               <TouchableOpacity onPress={() => setSearchTerm('')}>
@@ -105,7 +132,13 @@ export default function AllAppsScreen() {
               </TouchableOpacity>
             ) : null}
           </View>
-          <FourGridIcon size={20} color="#B5B7BC" />
+          <TouchableOpacity onPress={() => setViewMode(viewMode === 'list' ? 'grid' : 'list')}>
+            {viewMode === 'grid' ? (
+              <Image source={require('../../assets/images/grid_icon.png')} style={{ width: 30, height: 30 }} resizeMode="contain" />
+            ) : (
+              <Image source={require('../../assets/images/grid1.png')} style={{ width: 30, height: 30 }} resizeMode="contain" />
+            )}
+          </TouchableOpacity>
         </View>
       </View>
 
@@ -118,12 +151,24 @@ export default function AllAppsScreen() {
             <View style={styles.sectionHeader}>
               <Text style={styles.sectionTitle}>WORK</Text>
             </View>
-            {workFilteredApps.map((app, index) => (
-              <View key={app.id}>
-                <AppCard app={app} />
-                {index < workFilteredApps.length - 1 && <View style={styles.itemSeparator} />}
+            {viewMode === 'grid' ? (
+              <View style={styles.gridContainer}>
+                {chunkApps(workFilteredApps).map((row, rIdx) => (
+                  <View key={`work-row-${rIdx}`} style={styles.gridRow}>
+                    {row.map((app) => (
+                      <AppCard key={app.id} app={app} />
+                    ))}
+                  </View>
+                ))}
               </View>
-            ))}
+            ) : (
+              workFilteredApps.map((app, index) => (
+                <View key={app.id}>
+                  <AppCard app={app} />
+                  {index < workFilteredApps.length - 1 && <View style={styles.itemSeparator} />}
+                </View>
+              ))
+            )}
           </View>
         )}
 
@@ -133,12 +178,24 @@ export default function AllAppsScreen() {
             <View style={styles.sectionHeader}>
               <Text style={styles.sectionTitle}>UTILITIES</Text>
             </View>
-            {utilityFilteredApps.map((app, index) => (
-              <View key={app.id}>
-                <AppCard app={app} />
-                {index < utilityFilteredApps.length - 1 && <View style={styles.itemSeparator} />}
+            {viewMode === 'grid' ? (
+              <View style={styles.gridContainer}>
+                {chunkApps(utilityFilteredApps).map((row, rIdx) => (
+                  <View key={`util-row-${rIdx}`} style={styles.gridRow}>
+                    {row.map((app) => (
+                      <AppCard key={app.id} app={app} />
+                    ))}
+                  </View>
+                ))}
               </View>
-            ))}
+            ) : (
+              utilityFilteredApps.map((app, index) => (
+                <View key={app.id}>
+                  <AppCard app={app} />
+                  {index < utilityFilteredApps.length - 1 && <View style={styles.itemSeparator} />}
+                </View>
+              ))
+            )}
           </View>
         )}
 
@@ -148,12 +205,24 @@ export default function AllAppsScreen() {
             <View style={styles.sectionHeader}>
               <Text style={styles.sectionTitle}>NEWS</Text>
             </View>
-            {newsFilteredApps.map((app, index) => (
-              <View key={app.id}>
-                <AppCard app={app} />
-                {index < newsFilteredApps.length - 1 && <View style={styles.itemSeparator} />}
+            {viewMode === 'grid' ? (
+              <View style={styles.gridContainer}>
+                {chunkApps(newsFilteredApps).map((row, rIdx) => (
+                  <View key={`news-row-${rIdx}`} style={styles.gridRow}>
+                    {row.map((app) => (
+                      <AppCard key={app.id} app={app} />
+                    ))}
+                  </View>
+                ))}
               </View>
-            ))}
+            ) : (
+              newsFilteredApps.map((app, index) => (
+                <View key={app.id}>
+                  <AppCard app={app} />
+                  {index < newsFilteredApps.length - 1 && <View style={styles.itemSeparator} />}
+                </View>
+              ))
+            )}
           </View>
         )}
 
@@ -163,12 +232,24 @@ export default function AllAppsScreen() {
             <View style={styles.sectionHeader}>
               <Text style={styles.sectionTitle}>WIKI</Text>
             </View>
-            {wikiFilteredApps.map((app, index) => (
-              <View key={app.id}>
-                <AppCard app={app} />
-                {index < wikiFilteredApps.length - 1 && <View style={styles.itemSeparator} />}
+            {viewMode === 'grid' ? (
+              <View style={styles.gridContainer}>
+                {chunkApps(wikiFilteredApps).map((row, rIdx) => (
+                  <View key={`wiki-row-${rIdx}`} style={styles.gridRow}>
+                    {row.map((app) => (
+                      <AppCard key={app.id} app={app} />
+                    ))}
+                  </View>
+                ))}
               </View>
-            ))}
+            ) : (
+              wikiFilteredApps.map((app, index) => (
+                <View key={app.id}>
+                  <AppCard app={app} />
+                  {index < wikiFilteredApps.length - 1 && <View style={styles.itemSeparator} />}
+                </View>
+              ))
+            )}
           </View>
         )}
 
@@ -178,12 +259,24 @@ export default function AllAppsScreen() {
             <View style={styles.sectionHeader}>
               <Text style={styles.sectionTitle}>GAME</Text>
             </View>
-            {gameFilteredApps.map((app, index) => (
-              <View key={app.id}>
-                <AppCard app={app} />
-                {index < gameFilteredApps.length - 1 && <View style={styles.itemSeparator} />}
+            {viewMode === 'grid' ? (
+              <View style={styles.gridContainer}>
+                {chunkApps(gameFilteredApps).map((row, rIdx) => (
+                  <View key={`game-row-${rIdx}`} style={styles.gridRow}>
+                    {row.map((app) => (
+                      <AppCard key={app.id} app={app} />
+                    ))}
+                  </View>
+                ))}
               </View>
-            ))}
+            ) : (
+              gameFilteredApps.map((app, index) => (
+                <View key={app.id}>
+                  <AppCard app={app} />
+                  {index < gameFilteredApps.length - 1 && <View style={styles.itemSeparator} />}
+                </View>
+              ))
+            )}
           </View>
         )}
 
@@ -271,6 +364,13 @@ const styles = StyleSheet.create({
     flex: 1,
     fontSize: 14,
     color: '#111827',
+    outlineWidth: 0,
+    outlineColor: 'transparent',
+  },
+  searchIcon: {
+    width: 18,
+    height: 18,
+    tintColor: '#B5B7BC',
   },
   
   pageTitle: {
@@ -363,5 +463,49 @@ const styles = StyleSheet.create({
   noResultsText: {
     color: '#666',
     fontSize: 16,
+  },
+  // Grid view styles
+  gridContainer: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'space-between',
+    paddingHorizontal: 16,
+    marginHorizontal: -16,
+  },
+  gridRow: {
+    width: '100%',
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+    marginBottom: 8,
+    paddingHorizontal: 0,
+  },
+  gridAppCard: {
+    width: '25%',
+    alignItems: 'center',
+    marginBottom: 20,
+    paddingHorizontal: 8,
+    marginTop:18,
+  },
+  gridAppIcon: {
+    width: 56,
+    height: 56,
+    borderRadius: 999,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginBottom: 8,
+  },
+  gridAppPng: {
+    width: 40,
+    height: 40,
+  },
+  gridAppIconText: {
+    fontSize: 30,
+  },
+  gridAppName: {
+    fontSize: 11,
+    fontWeight: '500',
+    color: '#333',
+    textAlign: 'center',
+    lineHeight: 15,
   },
 });

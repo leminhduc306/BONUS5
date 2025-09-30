@@ -33,7 +33,7 @@
     {
       "id": 5,
       "name": "My Tasks",
-      "description": "Manage your daily tasks and assignments.",
+      "description": null,
       "icon": "📋"
     }
   ],
